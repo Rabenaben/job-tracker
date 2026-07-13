@@ -3,10 +3,12 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Board from './pages/Board';
+import Settings from './pages/Settings';
+import Loading from './components/Loading';
 
 function PrivateRoute({ children }) {
     const { user, loading } = useAuth();
-    if (loading) return <div>Loading...</div>;
+    if (loading) return <Loading />;
     return user ? children : <Navigate to="/login" />;
 }
 
@@ -16,6 +18,7 @@ function AppRoutes() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/" element={<PrivateRoute><Board /></PrivateRoute>} />
+            <Route path="/settings" element={<PrivateRoute><Settings /></PrivateRoute>} />
         </Routes>
     );
 }

@@ -6,6 +6,7 @@ import Column from '../components/Column';
 import AddApplicationModal from '../components/AddApplicationModal';
 import EditApplicationModal from '../components/EditApplicationModal';
 import UserMenu from '../components/UserMenu';
+import Loading from '../components/Loading';
 
 const STATUSES = ['applied', 'interviewing', 'offer', 'rejected', 'ghosted'];
 
@@ -168,14 +169,7 @@ export default function Board() {
     };
 
     if (loading) {
-        return (
-            <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center">
-                <div className="flex flex-col items-center gap-4">
-                    <div className="w-12 h-12 border-4 border-zinc-800 border-t-red-600 rounded-full animate-spin" />
-                    <p className="text-zinc-500">Loading your applications...</p>
-                </div>
-            </div>
-        );
+        return <Loading message="Loading your applications..." />;
     }
 
     // Calculate stats

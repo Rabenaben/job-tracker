@@ -11,8 +11,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-#[Fillable(['username', 'password'])]
-#[Hidden(['password', 'remember_token'])]
+#[Fillable(['username', 'password', 'google_refresh_token', 'gmail_connected_at', 'gmail_synced_at', 'gmail_sync_frequency'])]
+#[Hidden(['password', 'remember_token', 'google_refresh_token'])]
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
@@ -27,11 +27,17 @@ class User extends Authenticatable
     {
         return [
             'password' => 'hashed',
+            'gmail_connected_at' => 'datetime',
         ];
     }
 
     public function jobApplications()
     {
         return $this->hasMany(JobApplication::class);
+    }
+
+    public function isGmailConnected(): bool
+    {
+        return $this->google_refresh_token !== null;
     }
 }

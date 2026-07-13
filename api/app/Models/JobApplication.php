@@ -8,7 +8,8 @@ class JobApplication extends Model
 {
     protected $fillable = [
         'user_id', 'company', 'role', 'status',
-        'job_url', 'notes', 'salary_range', 'applied_at'
+        'job_url', 'notes', 'salary_range', 'applied_at',
+        'gmail_message_id', 'gmail_thread_id', 'source'
     ];
 
     protected $casts = ['applied_at' => 'date'];
